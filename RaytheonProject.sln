@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaytheonProject", "RaytheonProject.csproj", "{F1894E10-77AD-4469-BB43-E238F3B11978}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RaytheonProject.Tests", "..\RaytheonProject.Tests\RaytheonProject.Tests.csproj", "{D82D2519-077F-4561-AE06-33963020AD66}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F1894E10-77AD-4469-BB43-E238F3B11978}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1894E10-77AD-4469-BB43-E238F3B11978}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1894E10-77AD-4469-BB43-E238F3B11978}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1894E10-77AD-4469-BB43-E238F3B11978}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D82D2519-077F-4561-AE06-33963020AD66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D82D2519-077F-4561-AE06-33963020AD66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D82D2519-077F-4561-AE06-33963020AD66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D82D2519-077F-4561-AE06-33963020AD66}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {18828CB1-6BA0-4E43-8D49-C381F6A0C441}
+	EndGlobalSection
+EndGlobal
