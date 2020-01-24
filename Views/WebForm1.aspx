@@ -7,7 +7,7 @@
     <title></title>
 </head>
 <body>
-    <form id="form1" method="get" runat="server">
+    <form id="form1" method="post" runat="server">
         <asp:DropDownList ID="DropDownList1" runat="server" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
         </asp:DropDownList>
         <br />

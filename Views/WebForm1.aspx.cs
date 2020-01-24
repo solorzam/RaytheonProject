@@ -15,26 +15,29 @@ namespace RaytheonProject.Views
         protected void Page_Load(object sender, EventArgs e)
         {
             //txtName.Text = "";
+            SqlConnection con = null;
 
-            string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
-            using (SqlConnection con = new SqlConnection(CS))
-            //using (SqlConnection con = new SqlConnection("data source=DELL-TABLET\\MYPROJECTS; database=Raytheon; integrated security=SSPI"))
+            try
             {
-                SqlCommand cmd;
-
-                if (!IsPostBack)
+                string CS = ConfigurationManager.ConnectionStrings["DBCS"].ConnectionString;
+                using (con = new SqlConnection(CS))
+                //using (SqlConnection con = new SqlConnection("data source=DELL-TABLET\\MYPROJECTS; database=Raytheon; integrated security=SSPI"))
                 {
-                    cmd = new SqlCommand("select distinct Region from [salaries-by-region] order by Region", con);
-                    con.Open();
+                    SqlCommand cmd;
 
-                    DropDownList1.DataSource = cmd.ExecuteReader();
-                    DropDownList1.DataTextField = "Region";
-                    DropDownList1.DataValueField = "Region";
-                    DropDownList1.DataBind();
-                }
-                else
-                {
-                    string salaries = @"select r.School_Name,  [Region], [School_Type] , 
+                    if (!IsPostBack)
+                    {
+                        cmd = new SqlCommand("select distinct Region from [salaries-by-region] order by Region", con);
+                        con.Open();
+
+                        DropDownList1.DataSource = cmd.ExecuteReader();
+                        DropDownList1.DataTextField = "Region";
+                        DropDownList1.DataValueField = "Region";
+                        DropDownList1.DataBind();
+                    }
+                    else
+                    {
+                        string salaries = @"select r.School_Name,  [Region], [School_Type] , 
                                 t.[Mid_Career_Median_Salary],
                                 t.[Mid_Career_10th_Percentile_Salary],
                                 t.[Mid_Career_25th_Percentile_Salary],
@@ -44,18 +47,26 @@ namespace RaytheonProject.Views
                                         [dbo].[salaries-by-college-type] t
                                 where r.School_Name = t.School_Name and Region ='";
 
-                    salaries += DropDownList1.SelectedValue;
-                    salaries += "' order by r.School_Name";
+                        salaries += DropDownList1.SelectedValue;
+                        salaries += "' order by r.School_Name";
 
-                    cmd = new SqlCommand(salaries, con);
-                    con.Open();
-                    SqlDataReader drSalary = cmd.ExecuteReader();
-                    GridView1.DataSource = drSalary;
-                    GridView1.DataBind();
+                        cmd = new SqlCommand(salaries, con);
+                        con.Open();
+                        SqlDataReader drSalary = cmd.ExecuteReader();
+                        GridView1.DataSource = drSalary;
+                        GridView1.DataBind();
+                    }
+
                 }
-
             }
-
+            catch (Exception ex)
+            {
+                Console.WriteLine("Database Connection/Execution problem");
+            }
+            finally
+            {
+                con.Close();
+            }
         }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
