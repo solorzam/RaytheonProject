@@ -30,14 +30,14 @@ namespace RaytheonProject.Views
                         cmd = new SqlCommand("select distinct Region from [salaries-by-region] order by Region", con);
                         con.Open();
 
-                        DropDownList1.DataSource = cmd.ExecuteReader();
-                        DropDownList1.DataTextField = "Region";
-                        DropDownList1.DataValueField = "Region";
-                        DropDownList1.DataBind();
+                        DropDownLocation.DataSource = cmd.ExecuteReader();
+                        DropDownLocation.DataTextField = "Region";
+                        DropDownLocation.DataValueField = "Region";
+                        DropDownLocation.DataBind();
                     }
                     else
                     {
-                        string salaries = @"select r.School_Name,  [Region], [School_Type] , 
+                        string salariesQry = @"select r.School_Name,  [Region], [School_Type] , 
                                 t.[Mid_Career_Median_Salary],
                                 t.[Mid_Career_10th_Percentile_Salary],
                                 t.[Mid_Career_25th_Percentile_Salary],
@@ -45,13 +45,12 @@ namespace RaytheonProject.Views
                                 t.[Mid_Career_90th_Percentile_Salary]
                                 from    [dbo].[salaries-by-region] r, 
                                         [dbo].[salaries-by-college-type] t
-                                where r.School_Name = t.School_Name and Region ='";
+                                where r.School_Name = t.School_Name and Region =@region
+                                order by r.School_Name";
 
-                        salaries += DropDownList1.SelectedValue;
-                        salaries += "' order by r.School_Name";
-
-                        cmd = new SqlCommand(salaries, con);
+                        cmd = new SqlCommand(salariesQry, con);
                         con.Open();
+                        cmd.Parameters.AddWithValue("@region", DropDownLocation.SelectedValue);
                         SqlDataReader drSalary = cmd.ExecuteReader();
                         GridView1.DataSource = drSalary;
                         GridView1.DataBind();
@@ -67,6 +66,7 @@ namespace RaytheonProject.Views
             {
                 con.Close();
             }
+
         }
 
         protected void TextBox1_TextChanged(object sender, EventArgs e)
@@ -77,7 +77,7 @@ namespace RaytheonProject.Views
 
         protected void btnSayHello_Click1(object sender, EventArgs e)
         {
-            ltrMessage.Text = DropDownList1.SelectedValue;
+            ltrMessage.Text = DropDownLocation.SelectedValue;
 
         }
 
