@@ -43,9 +43,10 @@ namespace RaytheonProject.Views
                                 t.[Mid_Career_25th_Percentile_Salary],
                                 t.[Mid_Career_75th_Percentile_Salary],
                                 t.[Mid_Career_90th_Percentile_Salary]
-                                from    [dbo].[salaries-by-region] r, 
-                                        [dbo].[salaries-by-college-type] t
-                                where r.School_Name = t.School_Name and Region =@region
+                                from    [dbo].[salaries-by-region] r 
+                                join    [dbo].[salaries-by-college-type] t
+                                        on r.School_Name = t.School_Name
+                                where Region = @region
                                 order by r.School_Name";
 
                         cmd = new SqlCommand(salariesQry, con);
